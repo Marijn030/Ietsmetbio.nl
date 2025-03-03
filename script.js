@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Nav kauns nezināt, kauns ir nemācīties."
     ];
 
-    let lastIndex = -1;
+    let shuffledProverbs = [...proverbs]; // Copy array for shuffling
+    let index = 0;
+
     const button = document.getElementById("proverb-btn");
     const proverbDisplay = document.getElementById("proverb");
 
@@ -16,13 +18,23 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    button.addEventListener("click", () => {
-        let newIndex;
-        do {
-            newIndex = Math.floor(Math.random() * proverbs.length);
-        } while (newIndex === lastIndex);
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
-        lastIndex = newIndex;
-        proverbDisplay.innerText = proverbs[newIndex];
+    button.addEventListener("click", () => {
+        if (index === 0) {
+            shuffleArray(shuffledProverbs);
+        }
+
+        proverbDisplay.innerText = shuffledProverbs[index];
+        index++;
+
+        if (index >= shuffledProverbs.length) {
+            index = 0; // Reset after all have been shown
+        }
     });
 });
