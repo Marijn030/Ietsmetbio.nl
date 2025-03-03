@@ -15,21 +15,17 @@ body {
     position: relative;
 }
 
-/* Remove the overlay (fixes hidden text) */
-body::before {
-    content: none;
-}
-
-/* Header styling */
-header {
-    background: rgba(0, 0, 0, 0.5); /* Lighter transparency */
+/* Semi-transparent background for better text visibility */
+main, header {
+    background: rgba(0, 0, 0, 0.7); /* Dark background for contrast */
     padding: 20px;
-    border-bottom: 3px solid white;
-    position: relative;
+    border-radius: 10px;
+    width: 80%;
+    margin: 20px auto;
 }
 
-/* Fix text contrast */
-h1, h2, p {
+/* Text readability */
+h1, h2, p, blockquote {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
