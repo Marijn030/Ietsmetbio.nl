@@ -12,12 +12,6 @@ header {
     padding: 20px;
 }
 
-.flag {
-    width: 100%;
-    height: 50px;
-    background: linear-gradient(to bottom, #960018 33%, white 33%, white 66%, #960018 66%);
-}
-
 button {
     background-color: #960018;
     color: white;
