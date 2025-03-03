@@ -26,15 +26,23 @@ button:hover {
 }
 
 .flag-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
+    text-align: center;
+    margin-top: 10px;
 }
 
 .flag {
-    width: 200px;
-    height: 100px;
-    background: linear-gradient(to bottom, #960018 40%, white 20%, white 60%, #960018 40%);
-    border: 2px solid #960018;
+    width: 300px;
+    height: auto;
 }
+
+.coat-of-arms {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.coat-of-arms img {
+    width: 150px;
+    height: auto;
+}
+
 
