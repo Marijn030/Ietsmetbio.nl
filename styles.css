@@ -3,46 +3,38 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    background-color: #f4f4f4;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/5/57/Riga_skyline_panorama.jpg') no-repeat center center/cover;
+    color: white;
 }
 
 header {
-    background-color: #960018;
-    color: white;
+    background: rgba(0, 0, 0, 0.7);
     padding: 20px;
+    border-bottom: 3px solid white;
+}
+
+h1, h2 {
+    margin: 10px 0;
+}
+
+.flag-container, .coat-of-arms {
+    margin: 10px 0;
+}
+
+.flag, .coat-of-arms img {
+    width: 150px;
 }
 
 button {
-    background-color: #960018;
+    background: #960018;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    font-size: 16px;
     margin-top: 10px;
 }
 
 button:hover {
-    background-color: #700013;
+    background: #700013;
 }
-
-.flag-container {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.flag {
-    width: 300px;
-    height: auto;
-}
-
-.coat-of-arms {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.coat-of-arms img {
-    width: 150px;
-    height: auto;
-}
-
-
