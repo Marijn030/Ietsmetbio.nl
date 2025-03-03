@@ -40,7 +40,7 @@ header {
 }
 
 .flag, .coat-of-arms img {
-    width: 200px; /* Increased from 120px */
+    width: 500px; /* Increased from 120px */
     max-width: 100%;
 }
 
