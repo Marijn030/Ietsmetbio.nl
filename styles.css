@@ -30,3 +30,17 @@ button {
 button:hover {
     background-color: #700013;
 }
+
+.flag-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.flag {
+    width: 200px;
+    height: 100px;
+    background: linear-gradient(to bottom, #960018 40%, white 20%, white 60%, #960018 40%);
+    border: 2px solid #960018;
+}
+
