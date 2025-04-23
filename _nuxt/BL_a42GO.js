@@ -1,0 +1,1 @@
+import{_ as r}from"./B2HRNiMN.js";import{t as s,x as e,v as t,_ as n}from"./kymOcw8E.js";const o={class:"page-wrapper"};function l(_,a){return t(),s("div",o,a[0]||(a[0]=[e("h1",null,"Frans de Waal",-1),e("img",{src:r,alt:"Frans de Waal"},null,-1)]))}const c={},i=n(c,[["render",l]]);export{i as default};

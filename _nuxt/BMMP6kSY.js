@@ -1,0 +1,1 @@
+import{_ as r}from"./uMrvJtWO.js";import{t,x as s,v as a,_ as o}from"./kymOcw8E.js";const n={class:"page-wrapper"};function c(l,e){return a(),t("div",n,e[0]||(e[0]=[s("h1",null,"Midas Dekkers",-1),s("img",{src:r,alt:"Midas Dekkers"},null,-1)]))}const i={},m=o(i,[["render",c]]);export{m as default};
