@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Kaart van Nederlandse Universiteiten en Hogescholen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h2 {
+      text-align: center;
+      margin: 20px 0 10px;
+    }
+    .filters {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    select {
+      padding: 5px;
+      margin: 0 5px;
+    }
+    #map {
+      height: 80vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Kaart van Nederlandse Universiteiten en Hogescholen</h2>
+
+  <div class="filters">
+    <label for="typeFilter">Filter op type:</label>
+    <select id="typeFilter">
+      <option value="all">Alle</option>
+      <option value="hogeschool">Hogeschool</option>
+      <option value="universiteit">Universiteit</option>
+    </select>
+
+    <label for="cityFilter">Filter op stad:</label>
+    <select id="cityFilter">
+      <option value="all">Alle</option>
+    </select>
+  </div>
+
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+  <script>
+    const institutions = [
+      // Hogescholen
+      { name: "Avans Hogeschool", type: "hogeschool", city: "Breda", lat: 51.585, lng: 4.797 },
+      { name: "Aeres Hogeschool", type: "hogeschool", city: "Almere", lat: 52.375, lng: 5.225 },
+      { name: "Hogeschool Windesheim", type: "hogeschool", city: "Zwolle", lat: 52.512, lng: 6.091 },
+      { name: "Fontys Hogeschool", type: "hogeschool", city: "Eindhoven", lat: 51.448, lng: 5.490 },
+      { name: "Hanzehogeschool Groningen", type: "hogeschool", city: "Groningen", lat: 53.241, lng: 6.533 },
+      { name: "HAS green academy", type: "hogeschool", city: "Den Bosch", lat: 51.697, lng: 5.305 },
+      { name: "Hogeschool Inholland", type: "hogeschool", city: "Haarlem", lat: 52.387, lng: 4.637 },
+      { name: "Hogeschool Leiden", type: "hogeschool", city: "Leiden", lat: 52.160, lng: 4.478 },
+      { name: "Hogeschool Rotterdam", type: "hogeschool", city: "Rotterdam", lat: 51.924, lng: 4.478 },
+      { name: "Hogeschool Saxion", type: "hogeschool", city: "Enschede", lat: 52.220, lng: 6.895 },
+      { name: "Hogeschool Utrecht", type: "hogeschool", city: "Utrecht", lat: 52.086, lng: 5.176 },
+      { name: "Hogeschool van Amsterdam", type: "hogeschool", city: "Amsterdam", lat: 52.370, lng: 4.895 },
+      { name: "Hogeschool VHL", type: "hogeschool", city: "Velp", lat: 51.995, lng: 5.966 },
+      { name: "Hogeschool van Arnhem en Nijmegen", type: "hogeschool", city: "Arnhem", lat: 51.985, lng: 5.898 },
+      { name: "NHL Stenden Hogeschool", type: "hogeschool", city: "Leeuwarden", lat: 53.201, lng: 5.808 },
+
+      // Universiteiten
+      { name: "Erasmus Universiteit Rotterdam", type: "universiteit", city: "Rotterdam", lat: 51.922, lng: 4.488 },
+      { name: "Radboud Universiteit", type: "universiteit", city: "Nijmegen", lat: 51.819, lng: 5.868 },
+      { name: "Rijksuniversiteit Groningen", type: "universiteit", city: "Groningen", lat: 53.219, lng: 6.566 },
+      { name: "TU Delft", type: "universiteit", city: "Delft", lat: 51.999, lng: 4.373 },
+      { name: "Universiteit Leiden", type: "universiteit", city: "Leiden", lat: 52.159, lng: 4.485 },
+      { name: "Universiteit Maastricht", type: "universiteit", city: "Maastricht", lat: 50.847, lng: 5.688 },
+      { name: "Universiteit Utrecht", type: "universiteit", city: "Utrecht", lat: 52.090, lng: 5.121 },
+      { name: "Universiteit van Amsterdam", type: "universiteit", city: "Amsterdam", lat: 52.366, lng: 4.894 },
+      { name: "Universiteit Wageningen", type: "universiteit", city: "Wageningen", lat: 51.987, lng: 5.663 },
+      { name: "Vrije Universiteit Amsterdam", type: "universiteit", city: "Amsterdam", lat: 52.334, lng: 4.865 },
+    ];
+
+    const map = L.map('map').setView([52.1, 5.3], 7);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    const markers = [];
+
+    function updateMap() {
+      const typeFilter = document.getElementById('typeFilter').value;
+      const cityFilter = document.getElementById('cityFilter').value;
+
+      markers.forEach(m => map.removeLayer(m));
+
+      institutions.forEach(inst => {
+        const matchType = typeFilter === 'all' || inst.type === typeFilter;
+        const matchCity = cityFilter === 'all' || inst.city === cityFilter;
+
+        if (matchType && matchCity) {
+          const marker = L.marker([inst.lat, inst.lng])
+            .bindPopup(`<strong>${inst.name}</strong><br>${inst.city}<br>Type: ${inst.type}`);
+          marker.addTo(map);
+          markers.push(marker);
+        }
+      });
+    }
+
+    function populateCityFilter() {
+      const citySelect = document.getElementById('cityFilter');
+      const cities = Array.from(new Set(institutions.map(inst => inst.city))).sort();
+      cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+      });
+    }
+
+    document.getElementById('typeFilter').addEventListener('change', updateMap);
+    document.getElementById('cityFilter').addEventListener('change', updateMap);
+
+    populateCityFilter();
+    updateMap();
+  </script>
+</body>
+</html>

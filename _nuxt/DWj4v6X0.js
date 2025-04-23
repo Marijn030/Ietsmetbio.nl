@@ -1,1 +1,0 @@
-import{_ as r}from"./Cc4koE6i.js";import{t as a,x as e,v as s,_ as n}from"./kymOcw8E.js";const o={class:"page-wrapper"};function i(l,t){return s(),a("div",o,t[0]||(t[0]=[e("h1",null,"Matyas Bittenbinder",-1),e("img",{src:r,alt:"Matyas Bittenbinder"},null,-1)]))}const c={},m=n(c,[["render",i]]);export{m as default};

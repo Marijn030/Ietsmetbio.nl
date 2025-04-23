@@ -1,1 +1,0 @@
-import{_ as o}from"./BmQvt5Wl.js";import{t,x as r,v as a,_ as s}from"./kymOcw8E.js";const c={class:"page-wrapper"};function l(m,e){return a(),t("div",c,e[0]||(e[0]=[r("h1",null,"Tycho Malmberg",-1),r("img",{src:o,alt:"Tycho Malmberg"},null,-1)]))}const n={},i=s(n,[["render",l]]);export{i as default};
